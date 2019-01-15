@@ -1,0 +1,40 @@
+apply plugin: 'com.android.library'
+
+android {
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        manifestPlaceholders=[
+                "tencentAuthId":"tencent1104675129"
+        ]
+
+    }
+
+    buildTypes {
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.android.support:appcompat-v7:${versions.support_library}"
+    implementation "com.android.support:recyclerview-v7:${versions.support_library}"
+    implementation 'com.jakewharton:disklrucache:2.0.2'
+    implementation 'com.sina.weibo.sdk:core:4.1.4:openDefaultRelease@aar'
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:5.1.4'
+    implementation files('libs/open_sdk_r6019_lite.jar')
+    implementation files('libs/mid-sdk-4.06.jar')
+    implementation files('libs/mta-android-sdk-3.4.7.jar')
+}
