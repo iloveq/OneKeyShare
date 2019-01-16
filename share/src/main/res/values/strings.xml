@@ -1,6 +1,6 @@
 <resources>
     <string name="share_cancel">取消</string>
-    <string name="toast_cancel_share">分享取消</string>
+    <string name="toast_cancel_share">取消分享</string>
     <string name="wx_uninstall">微信没有安装</string>
     <string name="qq_uninstall">请安装QQ客户端</string>
 </resources>
