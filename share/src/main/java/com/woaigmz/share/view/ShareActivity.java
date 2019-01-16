@@ -34,6 +34,7 @@ public class ShareActivity extends Activity implements WbShareCallback, ShareLis
 
     public static final String RESULT_CHANNEL = "result_channel";
     public static final String RESULT_STATUS = "result_msg";
+    private static final long TIMEOUT = 15 * 1000;
 
     public static Intent getIntent(Context context, ShareBean share, int type) {
         Intent intent = new Intent(context, ShareActivity.class);
@@ -56,6 +57,13 @@ public class ShareActivity extends Activity implements WbShareCallback, ShareLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress);
         progress = findViewById(R.id.progress);
+        progress.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progress.setVisibility(View.GONE);
+                finish();
+            }
+        },TIMEOUT);
         Intent intent = getIntent();
         shareBean = intent.getParcelableExtra(SHARE_ENTRY);
         shareType = intent.getIntExtra(SHARE_CHANNEL, -1);
