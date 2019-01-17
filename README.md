@@ -1,4 +1,23 @@
 # 一键分享, 支持 QQ QQ空间 微信好友 微信朋友圈 新浪微博
+
+
+![未安装时.gif](https://upload-images.jianshu.io/upload_images/8886407-d46914f1227ed2f8.gif?imageMogr2/auto-orient/strip)
+
+![QQ.gif](https://upload-images.jianshu.io/upload_images/8886407-3f880a7b16753c35.gif?imageMogr2/auto-orient/strip)
+
+![微信.gif](https://upload-images.jianshu.io/upload_images/8886407-cdc8e3aa15580665.gif?imageMogr2/auto-orient/strip)
+
+```
+public class App extends Application {
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        ShareProxy.getInstance().init(this,new String[]{"1104675129","wxde66fe31ef4425d0","1550938859"});
+    }
+}
+```
+
 ```
 public class ShareInitAction implements ScAction {
 
