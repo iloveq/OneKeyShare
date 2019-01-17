@@ -21,6 +21,7 @@ import static com.woaigmz.share.utils.Utils.getSerializePath;
  * 修改微信登陆过程中获取code, 之后发送消息給, Activity直接进行页面跳转．＠91行
  */
 public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHandler {
+
     private IWXAPI iwxapi;
 
     @Override
