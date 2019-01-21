@@ -34,7 +34,7 @@ public class ShareActivity extends Activity implements WbShareCallback, ShareLis
 
     public static final String RESULT_CHANNEL = "result_channel";
     public static final String RESULT_STATUS = "result_msg";
-    private static final long TIMEOUT = 15 * 1000;
+    private static final long TIMEOUT = 5 * 1000;
 
     public static Intent getIntent(Context context, ShareBean share, int type) {
         Intent intent = new Intent(context, ShareActivity.class);
