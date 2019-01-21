@@ -98,6 +98,10 @@ public class QShare {
         } else {
             params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, QQShare.SHARE_TO_QQ_FLAG_QZONE_AUTO_OPEN);
         }
+        if(TextUtils.isEmpty(actionUrl)){
+            Toast.makeText(mActivity, "QQ分享链接不能为空", Toast.LENGTH_SHORT).show();
+            return;
+        }
         tencent.shareToQQ(mActivity, params, mIUiListener);
 
     }
@@ -117,6 +121,10 @@ public class QShare {
             params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, QQShare.SHARE_TO_QQ_FLAG_QZONE_ITEM_HIDE);
         } else {
             params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, QQShare.SHARE_TO_QQ_FLAG_QZONE_AUTO_OPEN);
+        }
+        if(TextUtils.isEmpty(actionUrl)){
+            Toast.makeText(mActivity, "QQ分享链接不能为空", Toast.LENGTH_SHORT).show();
+            return;
         }
         tencent.shareToQQ(mActivity, params, mIUiListener);
 
