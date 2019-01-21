@@ -3,6 +3,8 @@ package com.woaigmz.share.api;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.tencent.connect.share.QQShare;
 import com.tencent.tauth.IUiListener;
