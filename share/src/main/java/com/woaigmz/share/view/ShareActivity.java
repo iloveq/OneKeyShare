@@ -61,7 +61,6 @@ public class ShareActivity extends Activity implements WbShareCallback, ShareLis
             @Override
             public void run() {
                 progress.setVisibility(View.GONE);
-                finish();
             }
         },TIMEOUT);
         Intent intent = getIntent();
