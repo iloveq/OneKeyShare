@@ -30,8 +30,9 @@ import com.woaigmz.share.ShareProxy;
 public class ShareDialog extends DialogFragment implements IShareView, View.OnClickListener {
 
     private static final String KEY = "ShareDialog";
-    private static final String CHANNEL = "channel";
+    private static final String CHANNELS = "channel";
     private static final String COUNT = "spanCount";
+    private static final String ICONS = "icon";
 
     private ShareProxy.OnShareClickListener listener;
     private Context context;
@@ -58,11 +59,12 @@ public class ShareDialog extends DialogFragment implements IShareView, View.OnCl
         RecyclerView recyclerView = dialog.findViewById(R.id.recycler_view_share);
         TextView tvShareCancel = dialog.findViewById(R.id.tv_share_cancel);
         assert getArguments() != null;
-        int[] arr = getArguments().getIntArray(CHANNEL);
+        int[] arr = getArguments().getIntArray(CHANNELS);
+        int[] icon = getArguments().getIntArray(ICONS);
         int count = getArguments().getInt(COUNT);
         assert arr != null;
         recyclerView.setLayoutManager(new GridLayoutManager(context, count == 0 ? 4 : count));
-        recyclerView.setAdapter(new ShareAdapter(arr));
+        recyclerView.setAdapter(new ShareAdapter(arr, icon));
         tvShareCancel.setOnClickListener(this);
         return dialog;
     }
@@ -72,7 +74,19 @@ public class ShareDialog extends DialogFragment implements IShareView, View.OnCl
     public IShareView createShareDialog(Context context, int[] shareChannel, int spanCount) {
         this.context = context;
         Bundle bundle = new Bundle();
-        bundle.putIntArray(CHANNEL, shareChannel);
+        bundle.putIntArray(CHANNELS, shareChannel);
+        bundle.putInt(COUNT, spanCount);
+        ShareDialog dialog = new ShareDialog();
+        dialog.setArguments(bundle);
+        return dialog;
+    }
+
+    @Override
+    public IShareView createShareDialog(Context context, int[] shareChannel, int[] resIcons, int spanCount) {
+        this.context = context;
+        Bundle bundle = new Bundle();
+        bundle.putIntArray(CHANNELS, shareChannel);
+        bundle.putIntArray(ICONS, resIcons);
         bundle.putInt(COUNT, spanCount);
         ShareDialog dialog = new ShareDialog();
         dialog.setArguments(bundle);
@@ -110,32 +124,64 @@ public class ShareDialog extends DialogFragment implements IShareView, View.OnCl
         private int[] resId;
         private String[] name;
 
-        ShareAdapter(int[] arr) {
+        ShareAdapter(int[] arr, int[] icon) {
+
             resId = new int[arr.length];
             name = new String[arr.length];
-            for (int i = 0; i < arr.length; i++) {
-                if (arr[i] == ShareChannel.CHANNEL_WECHAT) {
-                    resId[i] = R.mipmap.share_wx;
-                    name[i] = "微信";
-                } else if (arr[i] == ShareChannel.CHANNEL_WECHAT_MOMENT) {
-                    resId[i] = R.mipmap.share_wx_moment;
-                    name[i] = "朋友圈";
-                } else if (arr[i] == ShareChannel.CHANNEL_QQ) {
-                    resId[i] = R.mipmap.share_qq;
-                    name[i] = "QQ";
-                } else if (arr[i] == ShareChannel.CHANNEL_QQ_ZONE) {
-                    resId[i] = R.mipmap.share_qq_zone;
-                    name[i] = "QQ空间";
-                } else if (arr[i] == ShareChannel.CHANNEL_WEIBO) {
-                    resId[i] = R.mipmap.share_sine;
-                    name[i] = "微博";
-                } else if (arr[i] == ShareChannel.CHANNEL_MORE) {
-                    resId[i] = R.mipmap.share_more;
-                    name[i] = "更多";
-                } else {
-                    throw new RuntimeException(" ShareChannel 数组初始化错误 ");
+            if (icon != null && arr.length == icon.length) {
+                for (int i = 0; i < arr.length; i++) {
+                    if (arr[i] == ShareChannel.CHANNEL_WECHAT) {
+                        resId[i] = icon[i];
+                        name[i] = "微信";
+                    } else if (arr[i] == ShareChannel.CHANNEL_WECHAT_MOMENT) {
+                        resId[i] = icon[i];
+                        name[i] = "朋友圈";
+                    } else if (arr[i] == ShareChannel.CHANNEL_QQ) {
+                        resId[i] = icon[i];
+                        name[i] = "QQ";
+                    } else if (arr[i] == ShareChannel.CHANNEL_QQ_ZONE) {
+                        resId[i] = icon[i];
+                        name[i] = "QQ空间";
+                    } else if (arr[i] == ShareChannel.CHANNEL_WEIBO) {
+                        resId[i] = icon[i];
+                        name[i] = "微博";
+                    } else if (arr[i] == ShareChannel.CHANNEL_MORE) {
+                        resId[i] = icon[i];
+                        name[i] = "更多";
+                    } else {
+                        throw new RuntimeException(" ShareChannel 数组初始化错误 ");
+                    }
+                }
+
+            } else {
+                for (int i = 0; i < arr.length; i++) {
+
+                    if (arr[i] == ShareChannel.CHANNEL_WECHAT) {
+                        resId[i] = R.mipmap.share_wx;
+                        name[i] = "微信";
+                    } else if (arr[i] == ShareChannel.CHANNEL_WECHAT_MOMENT) {
+                        resId[i] = R.mipmap.share_wx_moment;
+                        name[i] = "朋友圈";
+                    } else if (arr[i] == ShareChannel.CHANNEL_QQ) {
+                        resId[i] = R.mipmap.share_qq;
+                        name[i] = "QQ";
+                    } else if (arr[i] == ShareChannel.CHANNEL_QQ_ZONE) {
+                        resId[i] = R.mipmap.share_qq_zone;
+                        name[i] = "QQ空间";
+                    } else if (arr[i] == ShareChannel.CHANNEL_WEIBO) {
+                        resId[i] = R.mipmap.share_sine;
+                        name[i] = "微博";
+                    } else if (arr[i] == ShareChannel.CHANNEL_MORE) {
+                        resId[i] = R.mipmap.share_more;
+                        name[i] = "更多";
+                    } else {
+                        throw new RuntimeException(" ShareChannel 数组初始化错误 ");
+                    }
+
                 }
             }
+
+
         }
 
         @NonNull
@@ -148,11 +194,11 @@ public class ShareDialog extends DialogFragment implements IShareView, View.OnCl
         public void onBindViewHolder(@NonNull MyShareHolder holder, int position) {
             final int pos = holder.getAdapterPosition();
             holder.tvName.setText(name[pos]);
-            try{
+            try {
                 Drawable drawable = holder.tvName.getContext().getResources().getDrawable(resId[pos]);
                 drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
                 holder.tvName.setCompoundDrawables(null, drawable, null, null);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 

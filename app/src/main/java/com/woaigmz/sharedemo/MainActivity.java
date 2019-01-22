@@ -2,17 +2,16 @@ package com.woaigmz.sharedemo;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
 import com.woaigmz.share.ShareChannel;
-import com.woaigmz.share.ShareProxy;
 import com.woaigmz.share.ShareStatus;
 import com.woaigmz.share.model.ShareBean;
-import com.woaigmz.share.view.IShareView;
 import com.woaigmz.share.view.ShareActivity;
+import com.woaigmz.share.view.ShareDialogBuilder;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -25,9 +24,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        IShareView dialog = ShareProxy.getInstance().createShareDialog(this,new int[]{ShareChannel.CHANNEL_QQ,ShareChannel.CHANNEL_WECHAT,ShareChannel.CHANNEL_WEIBO},3);
-        ShareProxy.getInstance().setOnShareClickListener(dialog,this,new ShareBean("title","content","http://wx3.sinaimg.cn/large/006nLajtly1fkegnmnwuxj30dw0dw408.jpg",0,"https://www.baidu.com"));
-        dialog.show(getSupportFragmentManager());
+
+        new ShareDialogBuilder()
+                .setContext(this)
+                .setShareChannels(new int[]{ShareChannel.CHANNEL_QQ,ShareChannel.CHANNEL_WECHAT,ShareChannel.CHANNEL_WEIBO})
+//                .setShareIcon(new int[]{R.drawable.icon,R.drawable.icon,R.drawable.icon})
+                .setColumn(3)
+                .setModel(new ShareBean("title",
+                        "content",
+                        "http://wx3.sinaimg.cn/large/006nLajtly1fkegnmnwuxj30dw0dw408.jpg",
+                        0,
+                        "https://www.baidu.com"))
+                .build()
+                .show(getSupportFragmentManager());
+
     }
 
 

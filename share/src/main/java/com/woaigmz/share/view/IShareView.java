@@ -11,6 +11,8 @@ public interface IShareView {
 
     IShareView createShareDialog(Context context,int[] shareChannel, int spanCount);
 
+    IShareView createShareDialog(Context context,int[] shareChannel,int[] resIcons, int spanCount);
+
     int show(FragmentTransaction transaction);
 
     void show(FragmentManager manager);

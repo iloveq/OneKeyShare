@@ -50,6 +50,10 @@ public class ShareProxy {
         return ShareDialog.get().createShareDialog(context,shareChannels,column);
     }
 
+    public IShareView createShareDialog(Context context,int[] shareChannels,int[] resIcons,int column){
+        return ShareDialog.get().createShareDialog(context,shareChannels,resIcons,column);
+    }
+
     public void setOnShareClickListener(IShareView view, final Activity activity, final ShareBean shareBean) {
         view.setOnShareClickListener(new OnShareClickListener() {
             @Override

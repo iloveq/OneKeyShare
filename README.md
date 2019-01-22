@@ -49,11 +49,18 @@ public class ShareShowAction implements ScAction {
 
         Activity activity = (Activity) context;
 
-        IShareView shareDialog = ShareSdkProxy.getInstance().createShareDialog(new int[]{ShareChannel.CHANNEL_QQ, ShareChannel.CHANNEL_WEIBO, ShareChannel.CHANNEL_WECHAT_MOMENT, ShareChannel.CHANNEL_QQ_ZONE}, 4);
-        // 设置点击回调和数据
-        ShareSdkProxy.getInstance().setOnShareClickListener(shareDialog, activity, new ShareBean("分享了", "今天天气不错", "http://118.89.233.211:3000/images/1530106897838_.jpg", R.drawable.ic_launcher, "http://www.baidu.com"));
-        // 展示 dialog
-        shareDialog.show(activity.getFragmentManager());
+          new ShareDialogBuilder()
+                        .setContext(activity)
+                        .setShareChannels(new int[]{ShareChannel.CHANNEL_QQ,ShareChannel.CHANNEL_WECHAT,ShareChannel.CHANNEL_WEIBO})
+        //                .setShareIcon(new int[]{R.drawable.icon,R.drawable.icon,R.drawable.icon})
+                        .setColumn(3)
+                        .setModel(new ShareBean("title",
+                                "content",
+                                "http://wx3.sinaimg.cn/large/006nLajtly1fkegnmnwuxj30dw0dw408.jpg",
+                                0,
+                                "https://www.baidu.com"))
+                        .build()
+                        .show(getSupportFragmentManager());
 
     }
 
