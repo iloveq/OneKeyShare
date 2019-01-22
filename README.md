@@ -8,11 +8,12 @@
 
 （二） https://www.jianshu.com/p/92da26647aa9
 
-![未安装时.gif](https://upload-images.jianshu.io/upload_images/8886407-d46914f1227ed2f8.gif?imageMogr2/auto-orient/strip)
+![未安装时.gif](https://github.com/woaigmz/OneKeyShare/blob/master/img/uninstall.gif)
 
-![QQ.gif](https://upload-images.jianshu.io/upload_images/8886407-3f880a7b16753c35.gif?imageMogr2/auto-orient/strip)
+![QQ.gif](https://github.com/woaigmz/OneKeyShare/blob/master/img/qq.gif)
 
-![微信.gif](https://upload-images.jianshu.io/upload_images/8886407-cdc8e3aa15580665.gif?imageMogr2/auto-orient/strip)
+![微信.gif](https://github.com/woaigmz/OneKeyShare/blob/master/img/wxs.gif)
+
 
 ```
 public class App extends Application {
@@ -25,44 +26,5 @@ public class App extends Application {
 }
 ```
 
-```
-public class ShareInitAction implements ScAction {
-
-    private static final String TAG = "ShareInitAction";
-
-    @Override
-    public void invoke(Context context, Bundle bundle, String s, ScCallback scCallback) {
-        Log.e(TAG,"start");
-        // QQ 微信 微博
-        ShareSdkProxy.getInstance().init(context, new String[]{"214506", "wxa552e31d6839de85", "1550938859"});
-        Log.e(TAG,"end");
-    }
-
-}
-```
-
-```
-public class ShareShowAction implements ScAction {
-
-    @Override
-    public void invoke(Context context, Bundle bundle, String s, ScCallback scCallback) {
-
-        Activity activity = (Activity) context;
-
-          new ShareDialogBuilder()
-                        .setContext(activity)
-                        .setShareChannels(new int[]{ShareChannel.CHANNEL_QQ,ShareChannel.CHANNEL_WECHAT,ShareChannel.CHANNEL_WEIBO})
-        //                .setShareIcon(new int[]{R.drawable.icon,R.drawable.icon,R.drawable.icon})
-                        .setColumn(3)
-                        .setModel(new ShareBean("title",
-                                "content",
-                                "http://wx3.sinaimg.cn/large/006nLajtly1fkegnmnwuxj30dw0dw408.jpg",
-                                0,
-                                "https://www.baidu.com"))
-                        .build()
-                        .show(getSupportFragmentManager());
-
-    }
-
-}
-```
+![使用.gif](https://github.com/woaigmz/OneKeyShare/blob/master/img/use.png)
+      
