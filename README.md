@@ -16,6 +16,7 @@
 
 ![使用.gif](https://github.com/woaigmz/OneKeyShare/blob/master/img/use.png)
 
+
 ```
 public class App extends Application {
 
@@ -26,6 +27,7 @@ public class App extends Application {
     }
 }
 ```
+
 
 ```
 public class ShareShowAction implements ScAction {
@@ -52,4 +54,5 @@ public class ShareShowAction implements ScAction {
 
 }
 ```
+
       
