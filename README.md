@@ -1,4 +1,4 @@
-# 一键分享, 支持 QQ QQ空间 微信好友 微信朋友圈 新浪微博
+# 一键分享, 支持 QQ QQ空间 微信好友 微信朋友圈 新浪微博。
 
 [注意：关于新版微信分享结果总是成功](https://mp.weixin.qq.com/cgi-bin/announce?action=getannouncement&announce_id=11526372695t90Dn&version=&lang=zh_CN&token=)
 
