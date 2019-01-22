@@ -14,6 +14,7 @@
 
 ![微信.gif](https://github.com/woaigmz/OneKeyShare/blob/master/img/wxs.gif)
 
+![使用.gif](https://github.com/woaigmz/OneKeyShare/blob/master/img/use.png)
 
 ```
 public class App extends Application {
@@ -26,5 +27,29 @@ public class App extends Application {
 }
 ```
 
-![使用.gif](https://github.com/woaigmz/OneKeyShare/blob/master/img/use.png)
+```
+public class ShareShowAction implements ScAction {
+
+    @Override
+    public void invoke(Context context, Bundle bundle, String s, ScCallback scCallback) {
+
+        Activity activity = (Activity) context;
+
+          new ShareDialogBuilder()
+                        .setContext(activity)
+                        .setShareChannels(new int[]{ShareChannel.CHANNEL_QQ,ShareChannel.CHANNEL_WECHAT,ShareChannel.CHANNEL_WEIBO})
+        //                .setShareIcon(new int[]{R.drawable.icon,R.drawable.icon,R.drawable.icon})
+                        .setColumn(3)
+                        .setModel(new ShareBean("title",
+                                "content",
+                                "http://wx3.sinaimg.cn/large/006nLajtly1fkegnmnwuxj30dw0dw408.jpg",
+                                0,
+                                "https://www.baidu.com"))
+                        .build()
+                        .show(getSupportFragmentManager());
+
+    }
+
+}
+```
       
