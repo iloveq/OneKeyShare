@@ -18,7 +18,7 @@ import static com.woaigmz.share.utils.Utils.getSerializePath;
 /**
  * 微信客户端回调activity示例
  *
- * 修改微信登陆过程中获取code, 之后发送消息給, Activity直接进行页面跳转．＠91行
+ * 修改微信登陆过程中获取code, 之后发送消息給, Activity直接进行页面跳转
  */
 public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHandler {
 
