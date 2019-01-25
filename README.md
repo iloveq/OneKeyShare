@@ -21,9 +21,16 @@ allprojects {
 }
 
 ```
-module 下
+module 下 qq 的 id 和 OneKeyShare 依赖
 
 ```
+defaultConfig {
+        // ...
+        manifestPlaceholders=[
+                "tencentAuthId":"tencent1104675129"
+        ]
+
+    }
 dependencies {
     // ...
     implementation 'com.github.woaigmz:OneKeyShare:1.0.0'
