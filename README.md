@@ -31,6 +31,7 @@ defaultConfig {
         ]
 
     }
+    
 dependencies {
     // ...
     implementation 'com.github.woaigmz:OneKeyShare:1.0.0'
