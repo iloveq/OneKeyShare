@@ -51,6 +51,26 @@ public class ShareActivity extends Activity implements WbShareCallback, ShareLis
     private AppId appId;
     private ShareBean shareBean;
     private ProgressBar progress;
+    private boolean cancel = false;
+    
+    @Override
+    protected void onStop() {
+        super.onStop();
+        cancel = true;
+    }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(cancel){
+            progress.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    finish();
+                }
+            },1000);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
