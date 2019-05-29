@@ -26,14 +26,14 @@ import static com.woaigmz.share.utils.Utils.isQQClientAvailable;
 public class QShare {
 
 
-    private Activity mActivity;
+    private Activity activity;
     private Tencent tencent;
     private boolean isShareToQQ;
     private ShareListener shareListener;
     private AtomicBoolean init = new AtomicBoolean(false);
 
 
-    private IUiListener mIUiListener = new IUiListener() {
+    private IUiListener IUiListener = new IUiListener() {
 
         @Override
         public void onComplete(Object o) {
@@ -61,7 +61,7 @@ public class QShare {
     public QShare(Activity activity, String appId, boolean shareToQQ,ShareListener listener) {
         this.isShareToQQ = shareToQQ;
         this.shareListener = listener;
-        this.mActivity = activity;
+        this.activity = activity;
         if (isQQClientAvailable(activity)) {
             try {
                 tencent = Tencent.createInstance(appId, activity);
@@ -73,13 +73,13 @@ public class QShare {
             }
         }else {
             init.set(false);
-            listener.onSdkSetupError(mActivity.getResources().getString(R.string.qq_uninstall));
+            listener.onSdkSetupError(this.activity.getResources().getString(R.string.qq_uninstall));
         }
 
     }
 
     public void onActivityResultData(int requestCode, int resultCode, Intent data) {
-        Tencent.onActivityResultData(requestCode, resultCode, data, mIUiListener);
+        Tencent.onActivityResultData(requestCode, resultCode, data, IUiListener);
     }
 
     public void sendWebShareMessage(IShareModel share) {
@@ -101,10 +101,10 @@ public class QShare {
             params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, QQShare.SHARE_TO_QQ_FLAG_QZONE_AUTO_OPEN);
         }
         if(TextUtils.isEmpty(actionUrl)){
-            Toast.makeText(mActivity, "QQ分享链接不能为空", Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, "QQ分享链接不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
-        tencent.shareToQQ(mActivity, params, mIUiListener);
+        tencent.shareToQQ(activity, params, IUiListener);
 
     }
 
@@ -125,10 +125,10 @@ public class QShare {
             params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, QQShare.SHARE_TO_QQ_FLAG_QZONE_AUTO_OPEN);
         }
         if(TextUtils.isEmpty(actionUrl)){
-            Toast.makeText(mActivity, "QQ分享链接不能为空", Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, "QQ分享链接不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
-        tencent.shareToQQ(mActivity, params, mIUiListener);
+        tencent.shareToQQ(activity, params, IUiListener);
 
     }
 
@@ -148,7 +148,7 @@ public class QShare {
         } else {
             params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, QQShare.SHARE_TO_QQ_FLAG_QZONE_AUTO_OPEN);
         }
-        tencent.shareToQQ(mActivity, params, mIUiListener);
+        tencent.shareToQQ(activity, params, IUiListener);
 
     }
 

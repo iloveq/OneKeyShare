@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class SineShare {
 
     private WbShareHandler wbShareHandler;
-    private Activity mActivity;
+    private Activity activity;
     private AtomicBoolean init = new AtomicBoolean(false);
 
     public SineShare(Activity activity, String appKey) {
@@ -41,7 +41,7 @@ public class SineShare {
     public SineShare(Activity activity, String appKey, String redirectUrl, String scope) {
         Application application = activity.getApplication();
         WbSdk.install(application, new AuthInfo(application, appKey, redirectUrl, scope));
-        this.mActivity = activity;
+        this.activity = activity;
         wbShareHandler = new WbShareHandler(activity);
         wbShareHandler.registerApp();
         init.set(true);
@@ -82,14 +82,14 @@ public class SineShare {
         textObject.actionUrl = actionUrl;
         message.textObject = textObject;
         if (TextUtils.isEmpty(imgUrl)) {
-            Bitmap bmp = BitmapFactory.decodeResource(mActivity.getResources(), drawableId);
+            Bitmap bmp = BitmapFactory.decodeResource(activity.getResources(), drawableId);
             ImageObject imageObject = new ImageObject();
             imageObject.setImageObject(bmp);
             message.imageObject = imageObject;
             wbShareHandler.shareMessage(message, false);
 
         } else {
-            new BitmapAsyncTask(mActivity, imgUrl, new BitmapAsyncTask.OnBitmapListener() {
+            new BitmapAsyncTask(activity, imgUrl, new BitmapAsyncTask.OnBitmapListener() {
                 @Override
                 public void onSuccess(Bitmap bitmap) {
                     ImageObject imageObject = new ImageObject();
@@ -100,7 +100,7 @@ public class SineShare {
 
                 @Override
                 public void onException(Exception exception) {
-                    Bitmap bmp = BitmapFactory.decodeResource(mActivity.getResources(), drawableId);
+                    Bitmap bmp = BitmapFactory.decodeResource(activity.getResources(), drawableId);
                     ImageObject imageObject = new ImageObject();
                     imageObject.setImageObject(bmp);
                     message.imageObject = imageObject;
@@ -126,10 +126,10 @@ public class SineShare {
         message.textObject = textObject;
         final ImageObject imageObject = new ImageObject();
         if (TextUtils.isEmpty(imgUrl)) {
-            Bitmap bmp = BitmapFactory.decodeResource(mActivity.getResources(), drawableId);
+            Bitmap bmp = BitmapFactory.decodeResource(activity.getResources(), drawableId);
             imageObject.setImageObject(bmp);
         } else {
-            new BitmapAsyncTask(mActivity, imgUrl, new BitmapAsyncTask.OnBitmapListener() {
+            new BitmapAsyncTask(activity, imgUrl, new BitmapAsyncTask.OnBitmapListener() {
                 @Override
                 public void onSuccess(Bitmap bitmap) {
                     imageObject.setImageObject(bitmap);
@@ -140,7 +140,7 @@ public class SineShare {
                 @Override
                 public void onException(Exception exception) {
 
-                    Bitmap bmp = BitmapFactory.decodeResource(mActivity.getResources(), drawableId);
+                    Bitmap bmp = BitmapFactory.decodeResource(activity.getResources(), drawableId);
                     imageObject.setImageObject(bmp);
                     message.imageObject = imageObject;
                     wbShareHandler.shareMessage(message, false);

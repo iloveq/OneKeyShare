@@ -42,7 +42,6 @@
         <activity
             android:name=".view.ShareActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"
             android:theme="@style/NoTitleTranslucentTheme" />
 
         <activity
