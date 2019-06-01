@@ -3,7 +3,7 @@
 [注意：关于新版微信分享结果总是成功](https://mp.weixin.qq.com/cgi-bin/announce?action=getannouncement&announce_id=11526372695t90Dn&version=&lang=zh_CN&token=)
 
 ### 使用 ：
-一：OneKeyShare引入
+一：
 project 下
 ```
 allprojects {
@@ -34,7 +34,7 @@ defaultConfig {
     
 dependencies {
     // ...
-    implementation 'com.github.woaigmz:OneKeyShare:1.0.0'
+    implementation 'com.github.woaigmz:OneKeyShare:1.1.0'
 }
 ```
 
