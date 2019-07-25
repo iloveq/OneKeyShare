@@ -68,7 +68,7 @@ public class ShareActivity extends Activity implements WbShareCallback, ShareLis
                 public void run() {
                     finish();
                 }
-            },1000);
+            },100);
         }
     }
 
